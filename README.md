@@ -1,4 +1,4 @@
-🧭 Bionexis Rewiring Scaffold
+# 🧭 Bionexis Rewiring Scaffold
 
 System Status: Tier-IB Infrastructure Bridge
 
