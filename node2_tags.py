@@ -3,7 +3,7 @@
 # NOB (Ontology) & NFB (Frame) Implementation
 # ==========================================
 
-from node2_master_v1_1 import node2_core
+from .node2_master_v1_1 import node2_core
 
 class BionexisTagRegistry:
     def __init__(self, core_params):
