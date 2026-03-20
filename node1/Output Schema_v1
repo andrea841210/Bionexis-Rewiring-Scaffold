@@ -1,0 +1,190 @@
+# Node-1 Output Schema  
+*(Measurement Output → Node-2 Input Contract v1.0)*
+
+---
+
+## 1. Purpose
+
+This document defines:
+
+> **The structure and format of Node-1 outputs**
+
+It ensures:
+
+- compatibility with Node-2 contract  
+- consistent signal representation  
+- traceable measurement outputs  
+
+---
+
+## 2. Output Components
+
+Node-1 must produce the following three artifacts:
+
+---
+
+### 2.1 Direction Matrix
+
+**File:** `N1_direction_matrix.md`
+
+---
+
+#### Structure
+
+| Tumor | Axis | Direction | Observation |
+|------|------|----------|------------|
+| LUAD | MEK  | S        | IC50 distribution shows lower median in KRAS-mut vs WT |
+| LUAD | EGFR | R        | IC50 distribution shows higher median in KRAS-mut vs WT |
+
+---
+
+#### Field Definitions
+
+- Tumor:
+  - LUAD / PDAC / CRC  
+
+- Axis:
+  - MEK / ERK / EGFR / FGFR / pan-HER  
+
+- Direction:
+  - S / R / M / 0  
+
+- Observation:
+  - one-line, non-mechanistic description  
+  - based only on IC50 pattern  
+
+---
+
+---
+
+### 2.2 Axis Relevance Table
+
+**File:** `N1_axis_relevance_table.md`
+
+---
+
+#### Structure
+
+| Tumor | Axis | Direction | Tier | Rationale |
+|------|------|----------|------|----------|
+| LUAD | MEK  | S        | 1    | strong and consistent negative shift |
+| LUAD | EGFR | R        | 1    | consistent positive shift across probes |
+
+---
+
+#### Field Definitions
+
+- Tier:
+  - 1 / 2 / 3  
+
+- Rationale:
+  - must be observational  
+  - must not include biological interpretation  
+
+---
+
+---
+
+### 2.3 Unified Axis Map
+
+**File:** `N1_unified_axis_map.md`
+
+---
+
+#### Structure
+
+```text
+LUAD:
+  MEK: Tier 1 (S)
+  ERK: Tier 2 (S)
+  EGFR: Tier 1 (R)
+  FGFR: Tier 3 (M)
+  pan-HER: Tier 1 (R)
+
+PDAC:
+  ...
+
+CRC:
+  ...
+Purpose
+
+This serves as the direct input grid for Node-2
+
+3. Data Constraints
+3.1 Completeness
+
+All tumors must be included
+
+All axes must be assigned
+
+No missing cells allowed
+
+3.2 Consistency
+
+Direction and Tier must align with query_spec.md
+
+No contradictions allowed
+
+3.3 Traceability
+
+Each entry must be traceable to:
+
+IC50 probe data
+
+query conditions
+
+direction assignment logic
+
+4. Behavioral Constraints
+
+Node-1 outputs must be:
+
+strictly observational
+
+Must NOT include:
+
+mechanistic explanation
+
+pathway reasoning
+
+hypothesis language
+
+causal claims
+
+Allowed language:
+
+"distribution suggests..."
+
+"median shift observed..."
+
+"signal appears mixed..."
+
+5. Node-2 Compatibility
+
+Node-2 will consume:
+
+Unified Axis Map (primary)
+
+Direction Matrix (supporting)
+
+Axis Relevance Table (supporting)
+
+Node-1 must ensure:
+
+structure is stable, complete, and interpretation-ready
+
+6. System Role
+
+Node-1 Output Schema defines:
+
+how measurement results are structured for downstream reasoning
+
+It does NOT define:
+
+how signals are generated (query_spec)
+
+how structure is built (Node-2)
+
+how hypotheses are translated (Node-3)
+
+End of Specification
