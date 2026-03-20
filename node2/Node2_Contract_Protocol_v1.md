@@ -1,100 +1,325 @@
-Bionexis Node-2 Contract Protocol v1 (Acting)
-Module: Bionexis Node-2
+# Node-2 Contract — KRAS-LUAD Run-2
 
-Status: Acting Baseline (Not Finalized)
+## 0. Contract Role
 
-Source: Derived from KRAS-LUAD Reproducibility Run
+This artifact is a contract assembly layer.
 
-Compatibility: Pan-Cancer / Agnostic
+It is not:
+- a final scientific report
+- a strategic summary
+- a clinical recommendation
+- a translational proposal
 
-Purpose
-The purpose of this protocol is to define the formal conversion of Node-1 evidence residue into a structured Node-2 reasoning packet. It serves as the authoritative interface controlling how an execution LLM (Claude) processes evidence, ensuring that reasoning remains strictly bound to Node-1 signals without narrative drift or external inference.
+Its function is to bind:
+- Node-1 evidence residue
+- master schema
+- structural tag registry
 
-Contract Role
-This protocol acts as the MAS-core driver, functioning as an execution contract that constrains Claude’s reasoning during the Node-2 phase. The contract explicitly prevents:
+into a bounded Node-2 execution packet for Claude.
 
-Introduction of external biological evidence.
+---
 
-Strategic or clinical narrative expansion.
+## A. Run Context
 
-Cross-tumor extrapolation.
-Node-2 remains an evidence-bound hypothesis convergence layer.
+- Tumor Context: LUAD  
+- Driver Context: KRAS-mut  
+- Variant Scope: KRAS-mut vs WT comparison  
+- Input Unit Type: axis  
+- Run ID: Run-2  
+- Contract Mode: residue-oriented / Claude-ready  
 
-Run Context Schema
-Defines the operational boundaries based on parameters from node2_master.py:
+### Exclusion Note
 
-Tumor Context: Specific malignancy environment (e.g., LUAD, CRC).
+- do not run Node-2 reasoning
+- do not add biological interpretation beyond Node-1 evidence
+- do not expand to Node-3
+- do not convert residue into narrative claims
+- preserve ambiguity where present
 
-Driver Context: Primary oncogenic driver (e.g., KRAS-mut).
+### Run Grammar (from master schema)
 
-Variant Scope: Mutation specificity (e.g., G12C or pan-variant).
+- If MEK in KRAS-mut within LUAD  
+- If ERK in KRAS-mut within LUAD  
+- If EGFR in KRAS-mut within LUAD  
+- If FGFR in KRAS-mut within LUAD  
+- If pan-HER in KRAS-mut within LUAD  
 
-Exclusion Note: Explicit logic boundaries preventing extrapolation beyond the defined context.
+Reasoning mode:
+- axis-parallel residue binding
 
-Node-1 Evidence Schema
-Defines units received from the Evidence Engine (MAS-G):
+Axis set:
 
-Input Unit Type: Signal grouping structure (Axis, Family, Module, or Cluster).
+- MEK  
+- ERK  
+- EGFR  
+- FGFR  
+- pan-HER  
 
-Input Members: Biological entities populating each unit (e.g., MEK, ERK, EGFR).
+---
 
-Signal Attributes: Qualitative descriptors (Direction, Tier, Weight) representing residue-level evidence only.
+# B. Node-1 Input Schema
 
-Node-2 Reasoning Frame
-Defines the structural logic for processing inputs:
+Node-1 residue is accepted under the following locked schema.
 
-Reasoning Mode: Method of comparison (e.g., axis-parallel, family-contrast).
+### Source Mode
+recording-only
 
-Grouping Logic: Rule for clustering or contrasting input signals.
+### Scope
+directional IC50 behavior only
 
-Context Definition: Assignment logic for:
+### Comparison Basis
+KRAS-mut vs WT median IC50 shift per probe
 
-Context A: Primary dependency.
+### Direction Codes
 
-Context B: Compensatory / resistant structure.
+- **S** = sensitive shift  
+- **R** = resistant shift  
+- **M** = mixed signal across probes  
+- **0** = not evaluable  
 
-Context C: Divergent or unresolved residue.
-Reasoning may synthesize architecture-level hypotheses but must not introduce mechanistic inference.
+### Tier Codes
 
-Reasoning Register
-Defines the permitted reasoning depth during execution:
+- **Tier 1** — clear directionality with strong consistency and larger median shift  
+- **Tier 2** — directionality present with moderate signal  
+- **Tier 3** — mixed / weak evidence  
+- **Tier 0** — not evaluable  
 
-Mode-R (Residue Recording): Claude records signal structure without hypothesis synthesis.
+### Accepted Fields per Axis
 
-Mode-A (Architecture Hypothesis): Claude synthesizes architecture-level hypotheses from residue patterns.
-Both registers remain strictly bound to Node-1 evidence.
+- axis
+- direction code
+- tier
+- IC50 observation
+- anomaly note
+- evaluable probe count
+- median delta residue
 
-Output Boundary
-Output must remain an evidence-bound reasoning artifact. Prohibited items include:
+No mechanism inference.  
+No causal claims.  
+No axis expansion.
 
-Clinical recommendations or translational pathway proposals.
+---
 
-ROI or market framing.
+# C. Node-1 Evidence Residue
 
-Introduction of external evidence or cross-tumor generalization.
-Node-2 stops at hypothesis architecture, not intervention design.
+## LUAD Entry Grid
 
-Expected Output
-The produced Node-2 reasoning artifact contains:
+| Axis | Direction | Tier |
+|-----|------|------|
+| MEK | S | Tier 1 |
+| ERK | S | Tier 2 |
+| EGFR | R | Tier 1 |
+| FGFR | M | Tier 3 |
+| pan-HER | R | Tier 1 |
 
-Axis-wise reasoning blocks and signal clustering patterns.
+---
 
-Asymmetry observations and anomaly preservation.
+## Axis Residue Table
 
-Architecture-level hypothesis structure.
-This artifact becomes the logical residue passed to Node-3.
+### 1. MEK
 
-Structural Tags
-Supports the registry defined in node2_tags.py:
+- Direction: **S**
+- Tier: **1**
+- Observation: 4/4 probes show lower IC50 in KRAS-mut vs WT
+- Median delta: **-0.71**
+- Probes: **n = 4**
+- Anomaly: none (neg=4, pos=0)
 
-NOB (Narrative Ontology Binding): Tags NOB-01 through NOB-06 representing mechanistic identity and anomaly awareness.
+---
 
-NFB (Narrative Frame Binding): Tags NFB-01 through NFB-06.
-In this phase, NFB tags remain structural placeholders only and are not activated.
+### 2. ERK
 
-Protocol Status
-Current State: Acting Baseline.
+- Direction: **S**
+- Tier: **2**
+- Observation: 2/2 probes show lower IC50 in KRAS-mut vs WT
+- Median delta: **-0.20**
+- Probes: **n = 2**
+- Anomaly: none (neg=2, pos=0)
 
-Lock Status: Not yet locked into the Node-2 major task card.
+---
 
-Version Control: v1.0 (Derived from KRAS-LUAD reproducibility run).
+### 3. EGFR
+
+- Direction: **R**
+- Tier: **1**
+- Observation: 4/4 probes show higher IC50 in KRAS-mut vs WT
+- Median delta: **0.51**
+- Probes: **n = 4**
+- Anomaly: none (neg=0, pos=4)
+
+---
+
+### 4. FGFR
+
+- Direction: **M**
+- Tier: **3**
+- Observation: probe deltas mixed
+- Median delta: **0.08**
+- Probes: **n = 5**
+- Anomaly: mixed signals (neg=2, pos=3)
+
+---
+
+### 5. pan-HER
+
+- Direction: **R**
+- Tier: **1**
+- Observation: 2/2 probes show higher IC50 in KRAS-mut vs WT
+- Median delta: **1.14**
+- Probes: **n = 2**
+- Anomaly: none (neg=0, pos=2)
+
+---
+
+## Node-1 Residue Summary
+
+Tier-1 axes  
+- MEK (S)  
+- EGFR (R)  
+- pan-HER (R)
+
+Tier-2 axis  
+- ERK (S)
+
+Tier-3 axis  
+- FGFR (M)
+
+Conflict-bearing axis  
+- FGFR
+
+---
+
+# D. Node-2 Reasoning Frame
+
+This section defines **the reasoning frame only**.
+
+No reasoning execution occurs in this contract.
+
+### Frame Type
+
+- residue-oriented
+- axis-parallel
+- LUAD-bound
+- Node-1 residue anchored
+
+### Frame Input
+
+Claude receives the following axis entries:
+
+- MEK → Tier 1 (S)
+- ERK → Tier 2 (S)
+- EGFR → Tier 1 (R)
+- FGFR → Tier 3 (M)
+- pan-HER → Tier 1 (R)
+
+### Frame Priority
+
+Primary anchors  
+- Tier-1 axes
+
+Secondary anchor  
+- Tier-2 axis
+
+Conflict axis  
+- Tier-3 axis
+
+### Frame Behavior
+
+Claude may:
+
+- reason within axis boundaries
+- compare residue patterns
+- preserve anomaly signals
+
+Claude may **not**:
+
+- overwrite Node-1 direction codes
+- collapse mixed signals
+- introduce clinical claims
+- extrapolate beyond LUAD
+- convert IC50 signals into causal claims
+
+---
+
+# E. Output Boundary
+
+Allowed output class:
+
+- Node-2 reasoning artifact
+
+Disallowed output class:
+
+- clinical recommendation
+- translational expansion
+- market / ROI conclusion
+- founder narrative
+- cross-tumor generalization
+
+Boundary rules:
+
+- preserve recording-only residue origin
+- preserve LUAD context
+- preserve KRAS-mut vs WT comparison
+- preserve anomaly signals
+- do not introduce new external evidence
+
+---
+
+# F. Expected Output
+
+Claude should return a Node-2 reasoning artifact that is:
+
+- LUAD-bounded
+- axis-structured
+- residue-anchored
+- ambiguity-preserving
+- non-clinical
+- non-translational
+
+Minimum structure expected:
+
+- axis-wise reasoning blocks
+- explicit tier handling
+- explicit FGFR ambiguity preservation
+- no claim inflation
+
+---
+
+# G. Structural Tags
+
+## NOB — Narrative Ontology Binding
+
+- **NOB-01** Pathway Identity: KRAS-mut pathway  
+- **NOB-02** Mechanistic Role: axis unit in KRAS network  
+- **NOB-03** Mutation Class: KRAS-mut vs WT comparison  
+- **NOB-04** Functional Consequence: axis effect (residue only)  
+- **NOB-05** Evidence Boundary: Node-1 validation scope  
+- **NOB-06** Anomaly Awareness: LUAD signal conflicts  
+
+---
+
+## NFB — Narrative Frame Binding
+
+- **NFB-01** Clinical Problem: unmet need in LUAD  
+- **NFB-02** Competitive Failure: KRAS resistance logic  
+- **NFB-03** Mechanism-to-Outcome mapping  
+- **NFB-04** ROI Hypothesis *(Founder supply only)*  
+- **NFB-05** Context Win *(LUAD tactical framing)*  
+- **NFB-06** Risk Flags *(KRAS-mut comparison assumptions)*  
+
+---
+
+# Contract Closure
+
+This contract binds:
+
+- Node-1 LUAD residue
+- Node-2 master schema v1.1
+- Node-2 tag registry
+
+Status:
+
+- Claude-ready
+- reasoning not executed
+- ambiguity preserved
+- LUAD Run-2 bound
