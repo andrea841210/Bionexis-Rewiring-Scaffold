@@ -1,0 +1,323 @@
+# Node-1 Query Specification  
+*(IC50-based Measurement → Directional Signal Extraction v1.0)*
+
+---
+
+## 1. Purpose
+
+This document defines:
+
+> **How Node-1 converts IC50 probe data into directional signals and tiered axis rankings**
+
+It specifies:
+
+- data query workflow  
+- direction assignment logic (S / R / M / 0)  
+- tier classification principles  
+- transformation into Node-2-ready structure  
+
+---
+
+## 2. Data Source Binding
+
+Node-1 operates on:
+
+- Dataset:
+  - GDSC1
+  - GDSC2
+
+- Access:
+  - IC50 Explorer App (external GitHub tool)
+  - Query-based extraction (no raw data stored)
+
+---
+
+## 3. Query Workflow
+
+For each run:
+
+---
+
+### Step 1 — Mutation Filter
+
+- Select: **KRAS mutation**
+- Define comparison groups:
+  - KRAS-mut  
+  - KRAS-WT  
+
+---
+
+### Step 2 — Tumor Context Selection
+
+- LUAD  
+- PDAC  
+- CRC  
+
+---
+
+### Step 3 — Probe Selection
+
+- Select predefined **drug probe sets**  
+- Probe sets are defined in:
+  - `probe_registry.md`
+
+Each probe maps to a biological axis:
+- MEK  
+- ERK  
+- EGFR  
+- FGFR  
+- pan-HER  
+
+---
+
+### Step 4 — Data Extraction
+
+- Extract IC50 values
+- Use:
+  - top ~200 entries per probe (as available)
+
+---
+
+### Step 5 — Aggregation
+
+For each:
+
+> tumor × axis
+
+Compute:
+
+- Δ(IC50) = IC50(KRAS-mut) − IC50(KRAS-WT)
+- median Δ
+- probe-level direction distribution
+
+---
+
+## 4. Direction Assignment
+
+Direction is assigned per:
+
+> tumor × axis
+
+Based on all probes under that axis.
+
+---
+
+### 4.1 Base Signal Definition
+
+For each probe:
+
+- Δ < 0 → negative shift (sensitivity)  
+- Δ > 0 → positive shift (resistance)  
+
+---
+
+### 4.2 Direction Codes
+
+#### S — Sensitive
+
+Criteria:
+
+- neg_count > pos_count  
+- direction consistency is clear  
+- median Δ < 0  
+
+Notes:
+
+- small number of opposite probes allowed  
+- overall direction must be stable  
+
+---
+
+#### R — Resistant
+
+Criteria:
+
+- pos_count > neg_count  
+- direction consistency is clear  
+- median Δ > 0  
+
+Notes:
+
+- minor contradictory probes do not override majority  
+
+---
+
+#### M — Mixed
+
+Criteria (any of the following):
+
+- neg_count ≈ pos_count  
+- median Δ ≈ 0  
+- clear split behavior across probes  
+
+Interpretation:
+
+> No stable directional signal can be assigned  
+
+---
+
+#### 0 — No Signal
+
+Criteria:
+
+- insufficient probes (e.g. <2)  
+- negligible Δ distribution  
+- no interpretable pattern  
+
+---
+
+### 4.3 Decision Priority
+
+When ambiguity occurs:
+
+1. compare neg_count vs pos_count  
+2. evaluate direction consistency  
+3. check median Δ sign  
+
+---
+
+### 4.4 Exclusions
+
+The following must NOT influence direction:
+
+- single cell line behavior  
+- extreme outliers  
+- prior biological assumptions  
+
+---
+
+## 5. Tier Assignment
+
+Tier is assigned per:
+
+> tumor × axis
+
+---
+
+### Tier Definitions
+
+#### Tier 1 — Strong Signal
+
+- clear direction (S or R)  
+- strong consistency across probes  
+- stable median Δ  
+
+---
+
+#### Tier 2 — Moderate Signal
+
+- direction present but weaker  
+- partial inconsistency  
+- smaller Δ separation  
+
+---
+
+#### Tier 3 — Weak / Uncertain Signal
+
+- mixed or unstable signal  
+- low consistency  
+- noisy or low-confidence pattern  
+
+---
+
+## 6. Output Transformation
+
+Node-1 output must be converted into:
+
+---
+
+### 6.1 Direction Matrix
+
+Structure:
+
+- Tumor × Axis × Direction (S / R / M / 0)
+
+Includes:
+
+- one-line observation per cell  
+- non-mechanistic description  
+
+---
+
+### 6.2 Axis Relevance Table
+
+Structure:
+
+- Tumor × Axis × Direction × Tier (1 / 2 / 3)
+
+Rationale:
+
+- based only on IC50 behavior  
+
+---
+
+### 6.3 Unified Axis Map
+
+Structure:
+
+- Tumor → Axis → Tier (Direction)
+
+Purpose:
+
+> **Serves as the direct input grid for Node-2**
+
+---
+
+## 7. System Boundary
+
+Node-1 must remain:
+
+> **purely measurement-based**
+
+---
+
+### Node-1 MUST NOT:
+
+- perform mechanistic inference  
+- explain biological causality  
+- merge axes  
+- generate hypotheses  
+- introduce external knowledge  
+
+---
+
+## 8. Handling Data Limitations
+
+---
+
+### Missing Probes
+
+- must be explicitly recorded  
+- must NOT be silently replaced  
+
+---
+
+### Sparse Data
+
+- downgrade to Tier 3 or 0  
+- preserve uncertainty  
+
+---
+
+### Mixed Signals
+
+- must remain as M  
+- must NOT be resolved artificially  
+
+---
+
+## 9. System Role
+
+Node-1 defines:
+
+> **how raw IC50 observations become structured signals**
+
+It does NOT define:
+
+- structure (Node-2)  
+- interpretation (Node-3)  
+- application (downstream)  
+
+---
+
+End of Specification
