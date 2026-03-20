@@ -1,0 +1,109 @@
+# Node-1 Data Source Specification  
+*(GDSC-based IC50 Measurement Layer)*
+
+---
+
+## 1. Primary Dataset
+
+Node-1 measurements are derived from:
+
+- Genomics of Drug Sensitivity in Cancer (GDSC)
+  - GDSC1
+  - GDSC2
+
+---
+
+## 2. Data Access Method
+
+Raw dataset is **not stored in this repository**.
+
+Data is accessed through:
+
+> IC50 Explorer App (GitHub-hosted)
+
+This app functions as the **Node-1 data access layer**, enabling:
+
+- tumor-type filtering  
+- mutation-based stratification  
+- drug-level IC50 extraction  
+
+---
+
+## 3. Data Type
+
+Primary measurement:
+
+- IC50 (half-maximal inhibitory concentration)
+
+Optional (if used):
+
+- AUC
+
+---
+
+## 4. Query Context
+
+Data is queried under the following conditions:
+
+- Tumor types:
+  - LUAD  
+  - PDAC  
+  - CRC  
+
+- Mutation stratification:
+  - KRAS-mut  
+  - KRAS-WT  
+
+---
+
+## 5. Probe Definition
+
+Drug probes are defined externally in:
+
+> `probe_registry.md`
+
+Each probe maps to a biological axis (e.g., MEK, EGFR).
+
+---
+
+## 6. Data Handling Policy
+
+- No raw IC50 dataset is stored in this repository  
+- All data is **query-based and dynamically retrieved**  
+- All Node-1 outputs must be traceable to:
+  - dataset (GDSC1 / GDSC2)  
+  - query conditions  
+  - probe selection  
+
+---
+
+## 7. Versioning Policy
+
+- Dataset version (GDSC1 vs GDSC2) must be explicitly recorded in runs  
+- Query conditions must remain fixed within a run  
+- No mixing of dataset versions within a single execution  
+
+---
+
+## 8. Limitations
+
+- Not all probes may be present in GDSC  
+- Some axes may have limited or noisy signal  
+- Absence of data must be recorded explicitly  
+- Missing probes must not be inferred or substituted silently  
+
+---
+
+## 9. System Role
+
+This specification defines:
+
+> **where Node-1 data comes from and how it is accessed**
+
+It does not define:
+
+- interpretation  
+- ranking logic  
+- hypothesis generation  
+
+These are handled in downstream nodes.
