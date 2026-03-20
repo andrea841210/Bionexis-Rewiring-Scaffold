@@ -164,15 +164,10 @@ non-inferential
 Node-0 MUST NOT:
 
 rank evidence
-
 compare mechanisms
-
 infer dependencies
-
 construct pathways across entries
-
 generate hypotheses
-
 predict outcomes
 
 Any of the above is considered Node-1 or higher leakage.
@@ -186,9 +181,7 @@ A read-only, normalized evidence dictionary
 It serves as:
 
 input to Node-1 (measurement / mapping)
-
 input to Node-2 (hypothesis structuring)
-
 It is NOT directly actionable.
 
 8. System Boundary
@@ -200,9 +193,7 @@ Node-0 defines:
 It does NOT define:
 
 what matters
-
 what dominates
-
 what should be tested
 
 9. Validation Checklist (Pre-Release)
@@ -210,15 +201,10 @@ what should be tested
 Each entry must pass:
 
  Single source traceable
-
  Verbatim or near-verbatim evidence
-
  Context explicitly defined
-
  No inference language
-
  No cross-source merging
-
  No ranking or comparison
 
 10. Summary Statement
