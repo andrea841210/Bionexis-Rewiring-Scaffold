@@ -1,0 +1,198 @@
+# Node-1 Probe Registry  
+*(Axis → Drug Mapping Specification v1.0)*
+
+---
+
+## 1. Purpose
+
+This document defines:
+
+> **Which drug probes are used to represent each biological axis in Node-1 measurement**
+
+It ensures:
+
+- consistent probe selection  
+- traceable axis-level measurement  
+- compatibility with GDSC dataset constraints  
+
+---
+
+## 2. Axis Definition
+
+Node-1 operates on the following fixed axes:
+
+- MEK  
+- ERK  
+- EGFR  
+- FGFR  
+- pan-HER  
+
+No additional axes may be introduced without system-level update.
+
+---
+
+## 3. Probe Mapping
+
+---
+
+### 3.1 MEK Axis
+
+**Primary Probes:**
+
+- Trametinib  
+- Selumetinib  
+- PD0325901  
+
+**Notes:**
+
+- All probes target MEK1/2 signaling  
+- High confidence mapping to MAPK pathway  
+
+---
+
+### 3.2 ERK Axis
+
+**Primary Probes:**
+
+- Ulixertinib  
+
+**Secondary / Limited Probes:**
+
+- (if present in dataset)
+
+**Notes:**
+
+- ERK probe availability in GDSC is limited  
+- Signals may be lower confidence  
+- Often treated as supporting residue rather than dominant axis  
+
+---
+
+### 3.3 EGFR Axis
+
+**Primary Probes:**
+
+- Gefitinib  
+- Erlotinib  
+
+**Secondary Probes:**
+
+- Lapatinib (partial overlap)
+
+**Notes:**
+
+- Represents EGFR-specific inhibition  
+- May overlap with broader HER signaling in some probes  
+
+---
+
+### 3.4 pan-HER Axis
+
+**Primary Probes:**
+
+- Afatinib  
+- Dacomitinib  
+
+**Secondary Probes:**
+
+- Neratinib  
+
+**Notes:**
+
+- Represents HER-family inhibition (EGFR/HER2/HER3)  
+- Captures broader RTK compensation architecture  
+
+---
+
+### 3.5 FGFR Axis
+
+**Primary Probes:**
+
+- BGJ398 (Infigratinib)  
+
+**Secondary Probes:**
+
+- AZD4547  
+
+**Notes:**
+
+- FGFR probe availability may vary across GDSC  
+- Signal often weak or inconsistent  
+- Frequently classified as low-confidence or mixed axis  
+
+---
+
+## 4. Probe Inclusion Rules
+
+---
+
+### 4.1 Inclusion Criteria
+
+A probe may be used if:
+
+- present in GDSC dataset  
+- has sufficient IC50 data points  
+- maps clearly to a defined axis  
+
+---
+
+### 4.2 Exclusion Criteria
+
+A probe must NOT be used if:
+
+- not present in dataset  
+- insufficient data points  
+- ambiguous or multi-target without clear axis mapping  
+
+---
+
+## 5. Missing Probe Handling
+
+---
+
+### 5.1 Unavailable Probes
+
+If a probe is not found in GDSC:
+
+- must be explicitly recorded  
+- must NOT be silently replaced  
+
+---
+
+### 5.2 Axis Impact
+
+If probe coverage is limited:
+
+- axis may be downgraded in confidence  
+- may result in:
+  - Tier 3 classification  
+  - Mixed (M) signal  
+  - or No Signal (0)  
+
+---
+
+## 6. Mapping Constraints
+
+---
+
+- Each probe must map to **one primary axis only**  
+- Cross-axis inference is NOT allowed at Node-1  
+- Multi-target drugs must be assigned based on dominant activity  
+
+---
+
+## 7. System Role
+
+Probe Registry defines:
+
+> **what is measured**
+
+It does NOT define:
+
+- how measurement is interpreted (Node-1 query_spec)  
+- how structure is formed (Node-2)  
+- how hypotheses are generated (Node-3)  
+
+---
+
+End of Specification
