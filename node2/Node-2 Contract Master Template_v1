@@ -1,0 +1,240 @@
+# Node-2 Contract Master Template
+# Bionexis / KRAS Rewiring
+# Pan-Cancer / Tumor-Agnostic
+# Bound from master schema + Node-1 input + run-specific instance
+
+---
+
+## 0. Contract Role
+
+This artifact is a contract assembly master.
+
+It is not:
+- a final scientific report
+- a strategic summary
+- a clinical recommendation
+- a translational proposal
+
+Its function is to define the bounded Node-2 execution logic for Claude by combining:
+- master schema
+- KRAS-level family structure
+- run-specific Node-1 evidence
+- tumor-specific interpretation supplied at instance level
+
+This master template must not hard-code any tumor-specific pattern.
+
+---
+
+## A. Run Context
+
+- Tumor Context: [runtime bind]
+- Driver Context: KRAS-mut
+- Variant Scope: KRAS-mut vs WT comparison
+- Exclusion Note:
+  - no clinical recommendation
+  - no ROI / market framing
+  - no Node-3 translational expansion
+  - no cross-tumor extrapolation unless explicitly marked as contrast only
+
+Run grammar rendered from master schema:
+
+- If MAPK-family contrast in KRAS-mut within [Tumor Context]
+- If RTK-family contrast in KRAS-mut within [Tumor Context]
+- If divergent branch signal in KRAS-mut within [Tumor Context]
+
+---
+
+## B. Node-1 Input Schema
+
+### Input Unit Type
+family-contrast reasoning built from axis-level Node-1 evidence
+
+### Input Members
+
+#### MAPK Family
+- MEK
+- ERK
+
+#### RTK Family
+- EGFR
+- pan-HER
+
+#### Divergent Branch
+- FGFR
+
+### Signal Attributes
+Each input unit is derived from Node-1 evidence using:
+- direction code: S / R / M / 0
+- tier level: 1 / 2 / 3 / 0
+- directionality consistency
+- distribution residue
+- anomaly / mixed-signal residue where applicable
+
+### Run-Specific Pattern Summary
+[instance-supplied only]
+
+### Bound Family-Level Compression
+This section must be supplied by the run instance, not assumed by the master.
+Allowed forms include:
+- sensitivity-weighted dominant branch
+- resistance-weighted contrasting branch
+- divergent / non-stable residue branch
+- unresolved parallel contrast
+- weak / low-confidence family support
+
+No fixed branch polarity may be assumed at master level.
+
+---
+
+## C. Node-1 Evidence Residue
+
+### Trend Summary
+Provide run-specific family-level observations within [Tumor Context].
+
+### Residue Compression
+Claude may interpret Node-1 topology only through run-bound family contrast.
+No family-level priority may be invented if not supplied by the run instance.
+
+### Anomaly / Conflict Note
+Run-specific asymmetry must be preserved exactly as supplied:
+- weaker-support family members must not be over-promoted
+- mixed-signal branches must not be flattened
+- absent or non-evaluable branches must remain absent or non-evaluable
+
+### Source Note
+All reasoning must remain bound to Node-1 direction / tier / distribution residue only.
+No new evidence source may be introduced inside this contract.
+
+---
+
+## D. Node-2 Reasoning Frame
+
+### Reasoning Mode
+family-contrast
+
+### Grouping Logic
+- Family A: MAPK family
+  - MEK
+  - ERK
+- Family B: RTK family
+  - EGFR
+  - pan-HER
+- Residual Branch:
+  - FGFR
+
+### Context Definition
+This run uses tumor-specific rewiring comparison logic under KRAS-mut context.
+
+Interpretive framing:
+- Context A = primary dependency candidate
+- Context B = compensatory / resistance candidate
+- Context C = divergent / residual branch logic
+
+Important:
+These are interpretive context labels derived from Node-1 topology.
+They are not asserted mechanisms or experimental results.
+
+### Core Comparison Question
+Claude should reason only within this contrast:
+
+How should [Tumor Context] KRAS-mut Node-1 topology be structurally interpreted when:
+- Family-level signals show relative contrast, asymmetry, or instability
+- branch priorities are supplied only by Node-1 residue and run-specific compression
+- unresolved branches remain unresolved unless explicitly stabilized by evidence
+
+---
+
+## E. Output Boundary for Claude
+
+Claude must:
+- generate only Node-2 hypothesis structure
+- remain within rewiring logic
+- remain at architecture level, not final mechanistic conclusion
+- avoid clinical recommendation
+- avoid drug selection advice
+- avoid market / ROI framing
+- avoid Node-3 translational language
+- avoid outcome assertion
+- avoid writing as if the mechanism is already proven
+
+Claude must not:
+- introduce new pathways outside the bound family frame unless explicitly marked as speculative edge residue
+- convert Node-1 directionality directly into biological fact
+- flatten mixed residue into a stable branch
+- escalate this artifact into proposal / strategy / treatment narrative
+- assume any family is dominant, compensatory, or divergent unless supported by the run instance
+
+---
+
+## F. Expected Output Type
+
+Claude is allowed to return:
+
+1. Structural hypotheses
+   - family-level rewiring models
+   - branch-priority contrasts
+   - dominant-vs-compensatory logic
+   - asymmetry-preserving architecture candidates
+
+2. Rewiring contrasts
+   - dependency-side candidate
+   - compensation-side candidate
+   - residual / unstable branch candidate
+   - unresolved parallel branch candidate
+
+3. Candidate proxy directions
+   - directionally testable contrasts
+   - logic-level divergence
+   - branch-shift possibilities
+   - architecture-level conditional comparisons
+
+4. Experimental suggestion layer
+   - allowed only if still within Node-2 boundary
+   - must remain as drylab / hypothesis-supporting suggestion
+   - must not become Node-3 actionable pathway design
+
+Claude is not allowed to return:
+- final therapeutic claims
+- translational prioritization
+- product strategy
+- market positioning
+- clinical sequencing claims
+
+---
+
+## G. Optional Structural Tag Frame
+
+### NOB-Oriented Binding
+- NOB-01 Pathway Identity:
+  - KRAS-related signaling contrast within [Tumor Context]
+- NOB-02 Mechanistic Role:
+  - family-level branch function under [Tumor Context] KRAS-mut context
+- NOB-03 Mutation / Alteration Class:
+  - KRAS-mut alteration class
+- NOB-04 Functional Consequence:
+  - axis-specific residue only
+- NOB-05 Evidence Boundary:
+  - Node-1 validation scope only
+- NOB-06 Anomaly Awareness:
+  - run-specific asymmetry / mixed-signal / confidence imbalance
+
+### NFB-Oriented Binding
+- NFB should remain inert / minimally interpreted in this run
+- do not expand into strategic or clinical narrative
+- use only as structural placeholders if required by template
+
+---
+
+## H. Final Instruction to Claude
+
+Read this contract as a bounded execution packet.
+
+You are not generating a polished report.
+You are not inventing the task.
+You are not extending to Node-3.
+
+You are asked only to:
+- interpret [Tumor Context] Node-1 family-level topology under KRAS-mut context
+- generate bounded Node-2 rewiring hypotheses
+- preserve asymmetry between strong, moderate, mixed, or absent branches
+- keep all output within architecture-level reasoning
