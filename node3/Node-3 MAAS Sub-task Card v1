@@ -89,8 +89,177 @@ If the artifact is:
 
 Node-3 follows a fixed transformation pipeline:
 
-```text
 Node-2 Architecture
 → Decompression (human-readable)
 → Selective Branch Extraction
 → Experimental Illustration (limited)
+
+
+---
+
+## 8. Execution Phases
+
+---
+
+### Phase I — Hypothesis Architecture Decompression
+
+Translate Node-2 structure into human-readable form.
+
+You must:
+
+- describe family-level architecture  
+- explain branch relationships  
+- preserve signal asymmetry  
+- retain unresolved residues  
+
+You must NOT:
+
+- collapse mixed signals  
+- resolve ambiguity  
+- introduce new structure  
+
+---
+
+### Phase II — Branch Selection
+
+Select **1–2 branches only** for further exploration.
+
+Selection criteria:
+
+- structural tension  
+- novelty  
+- experimental tractability  
+
+You must:
+
+- justify selection based on Node-2 structure  
+
+You must NOT:
+
+- expand all branches  
+- introduce new branches  
+
+---
+
+### Phase III — Experimental Illustration
+
+Provide **illustrative experimental designs only**.
+
+Each example may include:
+
+- hypothesis statement  
+- rationale  
+- candidate assay types  
+- expected readouts  
+- feasibility notes  
+
+---
+
+### Experimental Constraints
+
+- Maximum branches: **2**  
+- No full experimental programs  
+- No exhaustive assay lists  
+- No optimization strategy  
+
+---
+
+## 9. Preservation Rules (Non-negotiable)
+
+The following must remain unchanged from Node-2:
+
+- branch roles  
+- signal hierarchy  
+- asymmetry  
+- anomaly / mixed signals  
+
+---
+
+### Strict Rules
+
+- Do not normalize asymmetry  
+- Do not resolve ambiguity  
+- Do not promote weak signals  
+- Do not suppress conflicting signals  
+
+---
+
+## 10. Boundary Conditions
+
+Node-3 must NOT:
+
+- introduce clinical recommendations  
+- propose therapeutic strategies  
+- include drug selection logic  
+- include ROI / commercial reasoning  
+- perform cross-tumor extrapolation  
+- modify Node-2 signal tiers or direction  
+
+---
+
+## 11. Output Structure (Strict)
+
+Your output must contain exactly three sections:
+
+---
+
+### I. Hypothesis Architecture (Human-Readable)
+
+- structural topology  
+- branch definitions  
+- signal relationships  
+- tension description  
+
+---
+
+### II. Selected Branches
+
+- 1–2 branches only  
+- clear structural rationale  
+
+---
+
+### III. Example Experimental Designs
+
+- illustrative only  
+- architecture-driven  
+- non-exhaustive  
+
+---
+
+## 12. Output Behavior Constraints
+
+- Use **hypothesis-level language**, not conclusions  
+- Avoid certainty claims  
+- Avoid mechanistic finality  
+
+---
+
+### Correct Style
+
+- "consistent with a model where..."  
+- "suggests a possible structure..."  
+- "may indicate..."  
+
+---
+
+### Incorrect Style
+
+- "proves that..."  
+- "demonstrates that..."  
+- "confirms mechanism..."  
+
+---
+
+## 13. Execution Start Condition
+
+Begin execution **only after**:
+
+- complete Node-2 artifact is present  
+- no missing sections detected  
+
+Then proceed immediately through Phase I → III.
+
+---
+
+End of Sub-task Card
