@@ -1,0 +1,230 @@
+# Node-0 Contract Master Template v1
+## (Agnostic | MAS-G Compatible | Frontier-Aware)
+
+---
+
+## 0. Purpose
+
+Node-0 defines the **evidence acquisition and normalization layer** of the system.
+
+It is not a reasoning task.
+
+It is not a ranking task.
+
+It is a **controlled distillation process** that transforms heterogeneous external knowledge into a **clean, traceable, read-only evidence dictionary**.
+
+---
+
+## 1. Execution Architecture
+
+Node-0 operates as a **two-stage pipeline**:
+
+### Stage 1 — Frontier Evidence Collection
+- Goal: maximize coverage of **recent, high-signal evidence**
+- Allowed sources:
+  - peer-reviewed publications
+  - high-impact preprints
+  - clinical trial reports
+  - conference abstracts (clearly labeled)
+- Time window: configurable (default: recent 3–5 years)
+- Output: **raw candidate pool (unfiltered, may be noisy)**
+
+---
+
+### Stage 2 — Evidence Filtering & Normalization (MAS-G Layer)
+
+All Stage 1 outputs MUST pass strict filtering before inclusion.
+
+Only filtered items become Node-0 deliverables.
+
+---
+
+## 2. Core Principles
+
+### 2.1 No Inference
+- No cross-paper synthesis
+- No interpretation beyond source sentence
+- No hypothesis generation
+
+---
+
+### 2.2 One Item = One Source
+Each entry must:
+- map to a single identifiable source
+- contain one verifiable statement
+
+---
+
+### 2.3 Verbatim Evidence
+- Evidence must be extracted as close to original sentence as possible
+- Minor trimming allowed, but no semantic alteration
+
+---
+
+### 2.4 Traceability
+Each item must include:
+- PMID or DOI (preferred)
+- source type (primary / clinical / review / abstract)
+- year
+
+---
+
+### 2.5 Context Integrity
+Each item must explicitly specify:
+- biological or system context (e.g., tumor type, model system)
+- variant / condition (if applicable)
+- co-condition (if applicable)
+
+No implicit assumptions allowed.
+
+---
+
+## 3. Filtering Rules (Critical Layer)
+
+The following criteria determine whether a frontier item is accepted:
+
+---
+
+### 3.1 Evidence Validity
+Reject if:
+- no identifiable source (PMID/DOI missing without justification)
+- statement cannot be traced to original text
+
+---
+
+### 3.2 Semantic Purity
+Reject if:
+- contains interpretation beyond source
+- merges multiple studies into one statement
+
+---
+
+### 3.3 Context Mixing
+Reject if:
+- combines multiple biological contexts into one entry
+- unclear tumor / system / condition mapping
+
+---
+
+### 3.4 Redundancy Control
+- Multiple sources describing the same mechanism → allowed as separate entries
+- Do NOT merge into a single generalized statement
+
+---
+
+### 3.5 Boundary Enforcement
+Reject if content includes:
+- ranking (importance, dominance)
+- comparative claims
+- causal chains inferred across studies
+
+---
+
+## 4. Output Schema (Canonical Form)
+
+Each Node-0 entry MUST follow this structure:
+
+```json
+{
+  "axis_name": "",
+  "mode": "",
+  "system_context": "",
+  "condition_tag": "",
+  "co_condition_tag": "",
+  "evidence_tier": "",
+  "citation": {
+    "pmid": "",
+    "doi": "",
+    "year": ""
+  },
+  "evidence_sentence": "",
+  "source_type": "",
+  "notes": ""
+}
+5. Mode Definition (Optional but Recommended)
+
+Modes are classification labels, not interpretations.
+
+Example:
+
+Mode A: signaling / pathway activation
+
+Mode B: metabolic adaptation
+
+Mode C: co-condition / system-level modulation
+
+Mode assignment must be:
+
+local (based on the single source)
+
+non-inferential
+
+6. Explicit Prohibitions
+
+Node-0 MUST NOT:
+
+rank evidence
+
+compare mechanisms
+
+infer dependencies
+
+construct pathways across entries
+
+generate hypotheses
+
+predict outcomes
+
+Any of the above is considered Node-1 or higher leakage.
+
+7. Deliverable Definition
+
+Node-0 output is:
+
+A read-only, normalized evidence dictionary
+
+It serves as:
+
+input to Node-1 (measurement / mapping)
+
+input to Node-2 (hypothesis structuring)
+
+It is NOT directly actionable.
+
+8. System Boundary
+
+Node-0 defines:
+
+"What exists"
+
+It does NOT define:
+
+what matters
+
+what dominates
+
+what should be tested
+
+9. Validation Checklist (Pre-Release)
+
+Each entry must pass:
+
+ Single source traceable
+
+ Verbatim or near-verbatim evidence
+
+ Context explicitly defined
+
+ No inference language
+
+ No cross-source merging
+
+ No ranking or comparison
+
+10. Summary Statement
+
+Node-0 is a distillation layer, not an intelligence layer.
+
+It transforms frontier knowledge into a structured, trustworthy baseline.
+
+Downstream intelligence depends on the integrity of this layer.
