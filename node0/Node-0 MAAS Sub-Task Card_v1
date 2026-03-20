@@ -1,0 +1,166 @@
+# Node-0 MAAS Sub-Task Card v1
+## (Orchestration Layer | MAS-G Driven | Bionexis Core)
+
+---
+
+## 📘 Task Identity
+
+**Node:** 0 — Evidence Acquisition Layer  
+**Function:** Orchestration & Contract Generation  
+**System Role:** ChatGPT (MAS Core) → MAS-G (Gemini Execution Module)  
+**Status:** Pre-execution
+
+---
+
+## 🎯 Mission
+
+Define how ChatGPT (MAS Core) should:
+
+1. Generate a **Node-0 execution contract**
+2. Dispatch the contract to **MAS-G (Gemini)**
+3. Validate and accept MAS-G outputs
+
+This task does NOT perform evidence collection.
+
+It defines the **control logic for executing Node-0 via MAS-G**.
+
+---
+
+## 🧠 System Definition
+
+Node-0 is responsible for:
+
+> Constructing a **read-only evidence dictionary** from external knowledge
+
+Execution is performed by:
+
+> **MAS-G (Gemini-based module)**
+
+Control and validation are handled by:
+
+> **ChatGPT (MAS Core)**
+
+---
+
+## ⚙️ Execution Modes
+
+Node-0 supports two operation modes:
+
+---
+
+### 🔹 Mode 1 — Direct Contract Execution
+
+- User provides a pre-defined Node-0 contract
+- ChatGPT forwards contract to MAS-G
+- MAS-G executes and returns structured output
+- ChatGPT performs validation only
+
+👉 Use case:
+- Fast execution
+- Pre-validated workflows
+- Reproducibility runs
+
+---
+
+### 🔹 Mode 2 — Full Bionexis Loop (Recommended)
+
+ChatGPT performs full orchestration:
+
+#### Step 1 — Contract Generation
+- Generate Node-0 contract based on:
+  - domain / system / condition
+  - desired scope and granularity
+- Contract may reference template but must adapt to context
+
+---
+
+#### Step 2 — MAS-G Dispatch
+- Send generated contract to MAS-G (Gemini)
+
+---
+
+#### Step 3 — Output Validation
+- Verify MAS-G output against Node-0 principles:
+  - no inference
+  - one item → one source
+  - explicit context
+  - schema compliance
+
+---
+
+#### Step 4 — Iterative Refinement (Optional)
+- If output quality is insufficient:
+  - adjust contract
+  - re-dispatch to MAS-G
+- Repeat until acceptable
+
+---
+
+## 🔺 Contract Requirements (For MAS-G)
+
+When generating a contract, ChatGPT MUST ensure:
+
+- Frontier-aware search (recency allowed)
+- Strict evidence extraction (MAS-G rules)
+- Structured output schema
+- No reasoning / no ranking / no synthesis
+
+---
+
+## 📁 Expected Outputs
+
+From this task:
+
+- `node0_masg_contract.md`  
+  → execution contract for MAS-G
+
+From MAS-G:
+
+- structured Node-0 evidence dictionary (JSON / table)
+
+---
+
+## 🟩 Exit Criteria
+
+Node-0 orchestration is complete when:
+
+- A valid contract is generated OR provided
+- MAS-G execution completes
+- Output passes validation checks
+- Output is usable as Node-0 dictionary
+
+---
+
+## 🔒 Boundary Declaration
+
+ChatGPT (MAS Core) MUST NOT:
+
+- directly perform literature search
+- generate evidence entries
+- interpret biological meaning
+- merge cross-source knowledge
+
+MAS-G MUST NOT:
+
+- perform inference
+- generate hypotheses
+- rank or compare evidence
+
+---
+
+## 🧭 System Interpretation
+
+Node-0 Sub-Task Card defines:
+
+> **How MAS Core controls MAS-G**
+
+It separates:
+
+- execution (Gemini)
+- reasoning (ChatGPT)
+
+This separation is mandatory for system stability.
+
+---
+
+### ✔ Node-0 MAAS Sub-Task Card v2 — Orchestration Ready
